@@ -74,16 +74,17 @@ class data:
         return temp1
 
     def scatterDataCentroid(self, centroids):
-        print(centroids)
         fig, ax = plt.subplots()
-        x = self.getCluster(centroids)
+        n,m = centroids.shape
+        # print("XXXX ", n , m)
         tes = []
-        for i in range(len(x)):
-            tes.append(i)
-            temp = np.array(x[i])
-            print(temp[0])
-            ax.scatter(temp[:, 0], temp[:, 1])
+        # for i in range(n):
+        #     temp = np.array(centroids[i])
+        #     print(temp)
+        #     ax.scatter(temp[0], temp[1])
         cent = np.array(centroids)
+        tmp = self.dset
+        ax.scatter(tmp[:, 0], tmp[:, 1], marker='o')
         plt.legend(tes)
         ax.scatter(cent[:, 0], cent[:, 1], marker='x')
         plt.title('Scatter')
