@@ -109,7 +109,7 @@ class standart_GA(GA):
         fitness = []
         for i in range(self.maxloop):
             self.calFitness()
-            print("FITNESS ",self.fitness)
+            fitness.append(min(self.fitness))
             offspring = []
             #crossover
             ind = math.ceil((self.cr_rate * self.npop) / 2)
@@ -125,8 +125,6 @@ class standart_GA(GA):
 
             #combine
             new = self.combine(offspring)
-            fitness.append(min(self.fitness))
-            print("min ", min(self.fitness))
             self.individu = new
 
         self.plot(fitness)
@@ -141,46 +139,61 @@ class standart_GA(GA):
         plt.show()
 
     def combine(self, offspring):
-        unionPop = self.individu+offspring
         fit = self.calFitnessOS(offspring)
+        unionPop = self.individu+offspring
         unionFit = self.fitness + fit
-        print("fitness asli",self.fitness)
-        print("fit offspring ",fit)
-        print("unionfit", unionFit)
-        self.bubbleSort(unionFit)
-        print("Sorted array is:")
-        for i in range(len(unionFit)):
-            print(unionFit[i], end=" ")
-        # self.sortinge(unionFit)
-        # s = np.array(unionFit)
+        # un = np.zeros(len(unionFit))
+        un = np.array(unionFit)
+        print("unionfit ", unionFit)
+        arr, sort_index = self.bubbleSort(un)
+        # print("SORT index :",sort_index)
+        # self.fitness = arr[0:self.npop]
+        print("arr ",arr)
+        # print("union pop :\n", np.array(unionPop))
         # sort_index = np.argsort(s)
-        # print("sort index :", sort_index)
-        # new = []
-        # for i in range(self.npop):
-        #     for j in range(len(sort_index)):
-        #         if i == sort_index[j]:
-        #             new.append(unionPop[j])
-        # return new
+
+        new = []
+        for i in range(len(self.fitness)):
+            # print("iiiise", i)
+            ind = 0
+            for j in range(len(unionFit)):
+                # print("Jjejej =",j)
+                # print("arr ", arr[i])
+                # print("unioinFit", unionFit[j])
+                if arr[i] == unionFit[j]:
+                    # print(type(self.fitness[i]),arr[i])
+                    # print(type(unionFit[j]),unionFit[j])
+                    # print(arr[i] == unionFit[j])
+                    ind = j
+                    # print("ind ", ind)
+                    break
+            new.append(unionPop[ind])
+        # print("neww ", new)
+        print()
+        return new
 
     def bubbleSort(self, arr):
         n = len(arr)
+        ind = []
+        for i in range(n):
+            ind.append(i)
 
-        # Traverse through all array elements
-        for i in range(n - 1):
-            # range(n) also work but outer loop will
-            # repeat one time more than needed.
-
-            # Last i elements are already in place
-            for j in range(0, n - i - 1):
-
-                # traverse the array from 0 to n-i-1
-                # Swap if the element found is greater
-                # than the next element
-                if arr[j] > arr[j + 1]:
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+        for i in range(n):
+            min = arr[i]
+            min1 = ind[i]
+            index = i
+            for j in range(i+1, n):
+                if min > arr[j]:
+                    min = arr[j]
+                    min1 = ind[j]
+                    index = j
+            temp = ind[index]
+            arr[i], arr[index] = min, arr[i]
+            ind[index] = ind[i]
+            ind[i] = temp
+        return arr, ind
 
     def sortinge(self, matrix):
-        print("sorting ", matrix)
         li = []
         for i in range(len(matrix)):
             li.append([matrix[i], i])
