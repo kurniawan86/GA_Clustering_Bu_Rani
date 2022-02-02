@@ -147,14 +147,55 @@ class standart_GA(GA):
         print("fitness asli",self.fitness)
         print("fit offspring ",fit)
         print("unionfit", unionFit)
-        s = np.array(unionFit)
-        sort_index = np.argsort(s)
-        print("sort index :",sort_index)
-        new = []
-        for i in range(self.npop):
-            for j in range(len(sort_index)):
-                if i == sort_index[j]:
-                    new.append(unionPop[j])
-        return new
+        self.bubbleSort(unionFit)
+        print("Sorted array is:")
+        for i in range(len(unionFit)):
+            print(unionFit[i], end=" ")
+        # self.sortinge(unionFit)
+        # s = np.array(unionFit)
+        # sort_index = np.argsort(s)
+        # print("sort index :", sort_index)
+        # new = []
+        # for i in range(self.npop):
+        #     for j in range(len(sort_index)):
+        #         if i == sort_index[j]:
+        #             new.append(unionPop[j])
+        # return new
+
+    def bubbleSort(self, arr):
+        n = len(arr)
+
+        # Traverse through all array elements
+        for i in range(n - 1):
+            # range(n) also work but outer loop will
+            # repeat one time more than needed.
+
+            # Last i elements are already in place
+            for j in range(0, n - i - 1):
+
+                # traverse the array from 0 to n-i-1
+                # Swap if the element found is greater
+                # than the next element
+                if arr[j] > arr[j + 1]:
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+    def sortinge(self, matrix):
+        print("sorting ", matrix)
+        li = []
+        for i in range(len(matrix)):
+            li.append([matrix[i], i])
+        li.sort()
+        ss = []
+
+        for x in li:
+            ss.append(x[1])
+        print(ss)
+
+        for i in range(len(matrix)):
+            for j in range (len(matrix)):
+                if i == ss[j]:
+                    print(matrix[j])
+
+
 
 
