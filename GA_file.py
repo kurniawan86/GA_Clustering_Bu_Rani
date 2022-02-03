@@ -276,6 +276,7 @@ class GA_mean(GA):
         # print("RSSS ", clusters.size)
         dim = self.ndim * self.nCluster
         if cl.size == dim:
+            #ini bikin error
             result = cl.reshape([1, dim])
             return result
         else:
