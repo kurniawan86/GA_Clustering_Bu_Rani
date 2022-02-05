@@ -242,17 +242,18 @@ class GA_mean(GA):
             # print("tes centroid ", self.transformToCentroid(self.individu[0]))
             centroid_temp = self.transformToCentroid(self.individu[0])
             add = self.get_MeanCentroid(centroid_temp)
-            print("addddd", add)
+            # print("addddd", add[0])
             # print("add ", add)
             # print("before add ", self.individu)
 
-            print("before add ", self.individu)
+            # print("before add ", self.individu)
             if type(add) == int:
                 self.individu = new
             else:
+                self.individu = new
                 add = add.tolist()
-                # self.individu[0] = add
-            print("after add ", self.individu)
+                self.individu[self.npop-1] = add[0]
+            # print("after add ", self.individu)
 
 
         # self.plot(fitness)
