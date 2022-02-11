@@ -15,7 +15,7 @@ class data:
         return sum(self.distMin)
 
     def readDataExcel(self):
-        file = pd.read_excel(open('dataset.xlsx', 'rb'))
+        file = pd.read_excel(open('borneo.xlsx', 'rb'))
         dframe = pd.DataFrame(file, columns=(['x', 'y']))
         self.dset = np.array(dframe)
 

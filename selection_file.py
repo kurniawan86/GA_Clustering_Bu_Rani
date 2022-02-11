@@ -50,6 +50,9 @@ class rw:
                 break
         return index
 
+    def pick1Parent(self):
+        return self.__pickParent()
+
     def pick2Parents(self):
         male = self.__pickParent()
         female = self.__pickParent()

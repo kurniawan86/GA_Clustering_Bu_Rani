@@ -108,7 +108,7 @@ class standart_GA(GA):
 
     def mainProgram(self):
         fitness = []
-        for i in range(self.maxloop):
+        for loop in range(self.maxloop):
             self.calFitness()
             fitness.append(min(self.fitness))
             offspring = []
@@ -127,6 +127,18 @@ class standart_GA(GA):
             #combine
             new = self.combine(offspring)
             self.individu = new
+
+            #pengujian
+            # print(loop)
+            if loop > 20:
+                # print(loop)
+                mn = sum(fitness[loop-10:loop])
+                mnn = mn/len(fitness[loop-10:loop])
+                mnm = mnn/fitness[loop]
+                # print(mnm)
+                if mnm < 1.0000001:
+                    print("iterasi stop :", loop)
+                    break
 
         self.plot(fitness)
         # print("best Fitnestt ", min(self.fitness))
@@ -221,7 +233,7 @@ class GA_mean(GA):
 
     def mainProgram(self):
         fitness = []
-        for i in range(self.maxloop):
+        for loop in range(self.maxloop):
             self.calFitness()
             fitness.append(min(self.fitness))
             offspring = []
@@ -255,6 +267,17 @@ class GA_mean(GA):
                 self.individu[self.npop-1] = add[0]
             # print("after add ", self.individu)
 
+            # pengujian
+            # print(loop)
+            if loop > 20:
+                # print(loop)
+                mn = sum(fitness[loop - 10:loop])
+                mnn = mn / len(fitness[loop - 10:loop])
+                mnm = mnn / fitness[loop]
+                # print(mnm)
+                if mnm < 1.0000001:
+                    print("iterasi stop :", loop)
+                    break
 
         # self.plot(fitness)
         self.bestFitness = min(self.fitness)
