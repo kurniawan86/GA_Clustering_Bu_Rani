@@ -4,7 +4,7 @@ import pandas as pd
 from evaluation_file import evaluation
 from GA_file import *
 import warnings
-from GAPoly_file import GA_poly
+from GAPoly_file import *
 
 def readDataExcel():
     file = pd.read_excel(open('borneo.xlsx', 'rb'))
@@ -41,7 +41,17 @@ if __name__ == '__main__':
     eva1.get_silhouette_score()
     eva1.get_davies_bouldin()
 
-    obj2 = GA_poly(data, npop, ndim, nCluster, maxloop, fitness_function=f_fitness)
+    print("===============")
+    obj3 = GA_poly(data, npop, ndim, nCluster, maxloop, fitness_function=f_fitness)
+    obj3.mainProgram()
+    f_fitness.plottingScatter(obj3.bestCentroid)
+    eva3 = evaluation(data, obj3.bestCentroid)
+    eva3.get_SSE()
+    eva3.get_silhouette_score()
+    eva3.get_davies_bouldin()
+
+    print("===============")
+    obj2 = GA_poly_mean(data, npop, ndim, nCluster, maxloop, fitness_function=f_fitness)
     obj2.mainProgram()
     f_fitness.plottingScatter(obj2.bestCentroid)
     eva2 = evaluation(data, obj2.bestCentroid)
