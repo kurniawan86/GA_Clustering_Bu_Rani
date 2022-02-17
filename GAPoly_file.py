@@ -13,7 +13,7 @@ class GA_poly(GA):
 
     def __init__(self, data, n_popoulation,n_dimension, ncluster, maxloop,fitness_function=None, selection=None, crossover=None, mutation=None, bound=None):
         super(GA_poly, self).__init__(n_popoulation,n_dimension, ncluster, maxloop,fitness_function, selection, crossover, mutation, bound)
-        print("hello GA Mean Cluster")
+        print("hello GA POLYGAMi Mean Cluster")
         self.dataset = data
 
     def mainProgram(self):
@@ -22,12 +22,30 @@ class GA_poly(GA):
             self.calFitness()
             fitness.append(min(self.fitness))
             offspring = []
+
             #crossover
+            nMate = 4
             ind = math.ceil((self.cr_rate * self.npop) / 2)
-            for i in range(ind):
-                child1, child2 = GA.crossover(self)
-                offspring.append(child1)
-                offspring.append(child2)
+            loopMate = math.ceil(ind / nMate)
+            # print("loop mate :",loopMate)
+            for i in range(loopMate):
+                for j in range(nMate):
+                    male, female = self.selection()
+                    while male==female:
+                        # print("male female :", male, female)
+                        female = random.randint(0,self.npop-1)
+                        # male, female = self.selection()
+                    crossOver = aritmatik(self.individu[male], self.individu[female])
+                    child1, child2 = crossOver.getOffspring()
+                    # print("child 1 ",child1)
+                    # print("child 2 ",child2)
+                    offspring.append(child1)
+                    offspring.append(child2)
+            #
+            # for i in range(ind):
+            #     child1, child2 = GA.crossover(self)
+            #     offspring.append(child1)
+            #     offspring.append(child2)
 
             #mutation process
             ind = math.ceil((self.mut_rate * self.npop) / 2)
@@ -54,13 +72,15 @@ class GA_poly(GA):
 
             # pengujian
             # print(loop)
-            if loop > 20:
+            if loop > 10:
                 # print(loop)
                 mn = sum(fitness[loop - 10:loop])
                 mnn = mn / len(fitness[loop - 10:loop])
                 mnm = mnn / fitness[loop]
+                xx = fitness[loop]
+                xy = fitness[loop-9]
                 # print(mnm)
-                if mnm < 1.0000001:
+                if xx == xy:
                     print("iterasi stop :", loop)
                     break
 

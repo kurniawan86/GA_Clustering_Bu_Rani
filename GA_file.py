@@ -130,13 +130,15 @@ class standart_GA(GA):
 
             #pengujian
             # print(loop)
-            if loop > 20:
+            if loop > 10:
                 # print(loop)
-                mn = sum(fitness[loop-10:loop])
-                mnn = mn/len(fitness[loop-10:loop])
-                mnm = mnn/fitness[loop]
+                mn = sum(fitness[loop - 10:loop])
+                mnn = mn / len(fitness[loop - 10:loop])
+                mnm = mnn / fitness[loop]
+                xx = fitness[loop]
+                xy = fitness[loop-9]
                 # print(mnm)
-                if mnm < 1.0000001:
+                if xx == xy:
                     print("iterasi stop :", loop)
                     break
 
@@ -268,14 +270,15 @@ class GA_mean(GA):
             # print("after add ", self.individu)
 
             # pengujian
-            # print(loop)
-            if loop > 20:
+            if loop > 10:
                 # print(loop)
                 mn = sum(fitness[loop - 10:loop])
                 mnn = mn / len(fitness[loop - 10:loop])
                 mnm = mnn / fitness[loop]
+                xx = fitness[loop]
+                xy = fitness[loop-9]
                 # print(mnm)
-                if mnm < 1.0000001:
+                if xx == xy:
                     print("iterasi stop :", loop)
                     break
 
