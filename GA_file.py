@@ -16,8 +16,8 @@ class GA:
     individu = []
     fitness = []
     fitnesses = []
-    mut_rate = 0.2
-    cr_rate = 0.6
+    mut_rate = 0.3
+    cr_rate = 0.8
     maxloop = 0
     nCluster = 0
 
