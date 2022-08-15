@@ -195,11 +195,15 @@ class GA_poly_mean(GA):
 class GA_poly(GA):
     bestCentroid = None
     bestFitness = None
+    nMate = None
+    loopstop = 0
+    fitnessAll = []
 
-    def __init__(self, data, n_popoulation,n_dimension, ncluster, maxloop,fitness_function=None, selection=None, crossover=None, mutation=None, bound=None):
+    def __init__(self, data, n_popoulation,n_dimension, ncluster, maxloop,nMate ,fitness_function=None, selection=None, crossover=None, mutation=None, bound=None):
         super(GA_poly, self).__init__(n_popoulation,n_dimension, ncluster, maxloop,fitness_function, selection, crossover, mutation, bound)
         print("hello GA POLYGAMi Cluster")
         self.dataset = data
+        self.nMate = nMate
 
     def mainProgram(self):
         fitness = []
@@ -209,7 +213,7 @@ class GA_poly(GA):
             offspring = []
 
             # crossover
-            nMate = 4
+            nMate = self.nMate
             ind = math.ceil((self.cr_rate * self.npop) / 2)
             loopMate = math.ceil(ind / nMate)
             # print("loop mate :",loopMate)
@@ -248,17 +252,24 @@ class GA_poly(GA):
                 # print(mnm)
                 if xx == xy:
                     print("iterasi stop :", loop)
+                    self.loopstop = loop-9
                     break
-
+        self.fitness = fitness
         self.plot(fitness)
         # print("best Fitnestt ", min(self.fitness))
         self.bestFitness = min(self.fitness)
         best_centroid = self.transformToCentroid(self.individu[0])
         # print("best Value (individu) \n", best_centroid)
         self.bestCentroid = best_centroid
-
+    
+    def stoploop(self):
+        return self.loopstop
+    
     def plot(self, val):
         plt.plot(val)
+        plt.title("GA Polygamy Clustering")
+        plt.xlabel("Iteration")
+        plt.ylabel("SSE value")
         plt.show()
 
     def combine(self, offspring):

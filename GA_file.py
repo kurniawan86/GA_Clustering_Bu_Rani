@@ -16,8 +16,8 @@ class GA:
     individu = []
     fitness = []
     fitnesses = []
-    mut_rate = 0.3
-    cr_rate = 0.8
+    mut_rate = 0.2
+    cr_rate = 0.7
     maxloop = 0
     nCluster = 0
 
@@ -101,6 +101,7 @@ class GA:
 class standart_GA(GA):
     bestCentroid = None
     bestFitness = None
+    iterstop = 0
 
     def __init__(self, n_popoulation,n_dimension, ncluster, maxloop,fitness_function=None, selection=None, crossover=None, mutation=None, bound=None):
         super(standart_GA, self).__init__(n_popoulation,n_dimension, ncluster, maxloop,fitness_function, selection, crossover, mutation, bound)
@@ -140,6 +141,7 @@ class standart_GA(GA):
                 # print(mnm)
                 if xx == xy:
                     print("iterasi stop :", loop)
+                    self.iterstop = loop - 9
                     break
 
         self.plot(fitness)

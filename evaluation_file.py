@@ -17,13 +17,16 @@ class evaluation:
     def get_davies_bouldin(self):
         z = davies_bouldin_score(self.data, self.index)
         print("Davies Boundies  :",z)
+        return z
 
     def get_SSE(self):
         print("SSE              :",sum(self.distMin))
+        return sum(self.distMin)
 
     def get_silhouette_score(self):
         z = silhouette_score(self.data, self.index)
         print("Silhoutte Score  :",z)
+        return z
 
     def transformToCentroid(self, individu):
         n, m = individu.shape
