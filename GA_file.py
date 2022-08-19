@@ -229,6 +229,7 @@ class GA_mean(GA):
     dataset = None
     bestCentroid = None
     bestFitness = None
+    iterstop = 0
 
     def __init__(self, data, n_popoulation,n_dimension, ncluster, maxloop,fitness_function=None, selection=None, crossover=None, mutation=None, bound=None):
         super(GA_mean, self).__init__(n_popoulation,n_dimension, ncluster, maxloop,fitness_function, selection, crossover, mutation, bound)
@@ -282,6 +283,7 @@ class GA_mean(GA):
                 # print(mnm)
                 if xx == xy:
                     print("iterasi stop :", loop)
+                    self.iterstop = loop - 9
                     break
 
         # self.plot(fitness)

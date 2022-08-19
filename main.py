@@ -24,63 +24,94 @@ if __name__ == '__main__':
     # centroids = np.array([[5, 5], [3, 1], [6, 6]])
     bound = [0, 1]
     
+    # hasil = []
+    # sse = []
+    # silhouutte = []
+    # davies = []
+    # loop = []
+    # for i in range(10):
+    #     # obj = standart_GA(npop, ndim, nCluster, maxloop, fitness_function=f_fitness, bound=bound)
+    #     obj = standart_GA(npop, ndim, nCluster, maxloop, fitness_function=f_fitness)
+    #     obj.mainProgram()
+    #     f_fitness.plottingScatter(obj.bestCentroid)
+    #     eva = evaluation(data,obj.bestCentroid)
+    #     # eva.get_SSE()
+    #     # eva.get_silhouette_score()
+    #     # eva.get_davies_bouldin()
+    #     sse.append(eva.get_SSE())
+    #     silhouutte.append(eva.get_silhouette_score())
+    #     davies.append(eva.get_davies_bouldin())
+    #     loop.append(obj.iterstop)
+    #
+    #     # hasil.append(sse)
+    #     # hasil.append(silhouutte)
+    #     # hasil.append(davies)
+    #     # hasil.append(loop)
+    # # hasil =np.array(hasil)
+    # print("SSE ", sse)
+    # print("Sihloute ", silhouutte)
+    # print("davies ", davies)
+    # print("iterasi stop ", loop)
+    #
+    # print("avg SSE ", mean(sse))
+    # print("avg Sihloute ", mean(silhouutte))
+    # print("avg davies ", mean(davies))
+    # print("avg iterasi stop ", mean(loop))
+
+    # GA MEAN
+    print("===============")
     hasil = []
     sse = []
     silhouutte = []
     davies = []
     loop = []
-    for i in range(10):
-        # obj = standart_GA(npop, ndim, nCluster, maxloop, fitness_function=f_fitness, bound=bound)
-        obj = standart_GA(npop, ndim, nCluster, maxloop, fitness_function=f_fitness)
-        obj.mainProgram()
-        f_fitness.plottingScatter(obj.bestCentroid)
-        eva = evaluation(data,obj.bestCentroid)
-        # eva.get_SSE()
-        # eva.get_silhouette_score()
-        # eva.get_davies_bouldin()
-        sse.append(eva.get_SSE())
-        silhouutte.append(eva.get_silhouette_score())
-        davies.append(eva.get_davies_bouldin())
-        loop.append(obj.iterstop)
-        
-        # hasil.append(sse)
-        # hasil.append(silhouutte)
-        # hasil.append(davies)
-        # hasil.append(loop)
-    # hasil =np.array(hasil) 
+    for i in range(2):
+        print("RUN PROGRAM KE:", i+1)
+        obj1 = GA_mean(data, npop, ndim, nCluster, maxloop, fitness_function=f_fitness)
+        obj1.mainProgram()
+        f_fitness.plottingScatter(obj1.bestCentroid)
+        eva1 = evaluation(data, obj1.bestCentroid)
+        eva1.get_SSE()
+        eva1.get_silhouette_score()
+        eva1.get_davies_bouldin()
+        print("LLOP :",obj1.iterstop)
+        loop.append(obj1.iterstop)
+
+        sse.append(eva1.get_SSE())
+        silhouutte.append(eva1.get_silhouette_score())
+        davies.append(eva1.get_davies_bouldin())
+        loop.append(obj1.iterstop)
+
+        hasil.append(sse)
+        hasil.append(silhouutte)
+        hasil.append(davies)
+        hasil.append(loop)
+
     print("SSE ", sse)
     print("Sihloute ", silhouutte)
     print("davies ", davies)
     print("iterasi stop ", loop)
-    
+
     print("avg SSE ", mean(sse))
     print("avg Sihloute ", mean(silhouutte))
     print("avg davies ", mean(davies))
     print("avg iterasi stop ", mean(loop))
-    #
-    # print("===============")
-    # obj1 = GA_mean(data, npop, ndim, nCluster, maxloop, fitness_function=f_fitness)
-    # obj1.mainProgram()
-    # f_fitness.plottingScatter(obj1.bestCentroid)
-    # eva1 = evaluation(data, obj1.bestCentroid)
-    # eva1.get_SSE()
-    # eva1.get_silhouette_score()
-    # eva1.get_davies_bouldin()
     
-    #GA polygamy
+    # GA polygamy
     # mateHasil = []
     # mateHAsilAvg = []
     # fitnessAll = []
-    # for mate in range (8):
+    # for mate in range(2):
     #     hasil = []
     #     hasilAvg = []
     #     sse = []
     #     silhouutte = []
     #     davies = []
     #     loop = []
-    #     for i in range(10):
+    #     for i in range(3):
     #         nmate = 2+mate
     #         print("===============")
+    #         print("n MATE :",nmate)
     #         obj3 = GA_poly(data, npop, ndim, nCluster, maxloop, nmate, fitness_function=f_fitness)
     #         obj3.mainProgram()
     #         fitnessAll.append(obj3.fitnessAll)
@@ -103,7 +134,7 @@ if __name__ == '__main__':
     #     hasilAvg.append(sil_average)
     #     hasilAvg.append(dav_average)
     #     hasilAvg.append(iterasi_average)
-
+    #
     #     # print(np.array(hasil))
     #     mateHasil.append(hasil)
     #     mateHAsilAvg.append(hasilAvg)
